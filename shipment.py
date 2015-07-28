@@ -47,6 +47,7 @@ class ShipmentOutPacked:
 
             if labs:
                 lab, = labs
+                self.result.labs = labs
                 self.result.label = buffer(open(lab, "rb").read())
                 self.result.label_name = lab.split('/')[2]
                 return 'result'
@@ -54,6 +55,7 @@ class ShipmentOutPacked:
                 self.result.note = self.raise_user_error('not_label', {
                         'carrier': shipment.carrier.rec_name,
                         }, raise_exception=False)
+        self.result.labs = None
         self.result.label = None
         self.result.label_name = None
         return 'result'
