@@ -48,7 +48,7 @@ class ShipmentOutPacked:
             if labs:
                 lab, = labs
                 self.result.labs = labs
-                self.result.label = buffer(open(lab, "rb").read())
+                self.result.label = fields.Binary.cast(open(lab, "rb").read())
                 self.result.label_name = lab.split('/')[2]
                 return 'result'
             else:
