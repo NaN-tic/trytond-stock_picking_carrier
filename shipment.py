@@ -52,7 +52,7 @@ class ShipmentOutPacked:
                 self.result.label_name = lab.split('/')[2]
                 return 'result'
             else:
-                self.result.note = self.raise_user_error('not_label', {
+                self.result.note += self.raise_user_error('not_label', {
                         'carrier': shipment.carrier.rec_name,
                         }, raise_exception=False)
         self.result.labs = None
