@@ -5,10 +5,10 @@ from trytond.model import fields
 from trytond.pool import Pool, PoolMeta
 
 __all__ = ['ShipmentOutPicking', 'ShipmentOutPickingResult', 'ShipmentOutPacked']
-__metaclass__ = PoolMeta
 
 
 class ShipmentOutPicking:
+    __metaclass__ = PoolMeta
     __name__ = 'stock.shipment.out.picking'
     carrier = fields.Boolean('Carrier',
         help='Send shipment to API carrier')
@@ -19,12 +19,14 @@ class ShipmentOutPicking:
 
 
 class ShipmentOutPickingResult:
+    __metaclass__ = PoolMeta
     __name__ = 'stock.shipment.out.picking.result'
     label = fields.Binary('Label', filename='label_name')
     label_name = fields.Char('Label Name')
 
 
 class ShipmentOutPacked:
+    __metaclass__ = PoolMeta
     __name__ = 'stock.shipment.out.packed'
 
     @classmethod
