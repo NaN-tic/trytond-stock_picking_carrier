@@ -1,8 +1,11 @@
 #This file is part stock_picking_carrier module for Tryton.
-#The COPYRIGHT file at the top level of this repository contains 
+#The COPYRIGHT file at the top level of this repository contains
 #the full copyright notices and license terms.
+import tarfile
+import tempfile
 from trytond.model import fields
 from trytond.pool import Pool, PoolMeta
+from trytond.transaction import Transaction
 
 __all__ = ['ShipmentOutPicking', 'ShipmentOutPickingResult', 'ShipmentOutPacked']
 __metaclass__ = PoolMeta
@@ -40,21 +43,36 @@ class ShipmentOutPacked:
 
         super(ShipmentOutPacked, self).transition_packed()
         shipment = self.result.shipment
+        dbname = Transaction().cursor.dbname
 
         # Send shipment to carrier API
         if self.picking.carrier and shipment.carrier:
             refs, labs, errs = Shipment.send_shipment_api(shipment)
 
             if labs:
-                lab, = labs
+                if len(labs) > 1:
+                    temp = tempfile.NamedTemporaryFile(
+                        prefix='%s-carrier-' % dbname, delete=False)
+                    temp.close()
+                    with tarfile.open(temp.name, "w:gz") as tar:
+                        for path_label in labs:
+                            tar.add(path_label)
+                    tar.close()
+                    label = fields.Binary.cast(open(temp.name, "rb").read())
+                    label_name = '%s.tgz' % temp.name.split('/')[2]
+                else:
+                    lab, = labs
+                    label = fields.Binary.cast(open(lab, "rb").read())
+                    label_name = lab.split('/')[2]
                 self.result.labs = labs
-                self.result.label = fields.Binary.cast(open(lab, "rb").read())
-                self.result.label_name = lab.split('/')[2]
+                self.result.label = label
+                self.result.label_name = label_name
                 return 'result'
             else:
                 self.result.note += self.raise_user_error('not_label', {
                         'carrier': shipment.carrier.rec_name,
                         }, raise_exception=False)
+        # labs is not a file in packed result; we use in extra modules labs file
         self.result.labs = None
         self.result.label = None
         self.result.label_name = None
