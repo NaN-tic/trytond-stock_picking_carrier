@@ -3,7 +3,7 @@
 this repository contains the full copyright notices and license terms. -->
 <data>
     <xpath
-        expr="/form/field[@name=&quot;code&quot;]" position="after">
+        expr="/form/field[@name='product']" position="after">
             <label name="carrier"/>
             <field name="carrier"/>
     </xpath>
