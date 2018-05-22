@@ -3,15 +3,28 @@
 The COPYRIGHT file at the top level of this repository contains the full copyright notices and license terms. -->
 <tryton>
     <data>
-        <record model="ir.ui.view" id="stock_shipment_out_picking">
+        <!-- Stock Shipment Out Picking -->
+        <record model="ir.ui.view" id="stock_shipment_out_picking_start">
             <field name="model">stock.shipment.out.picking</field>
-            <field name="inherit" ref="stock_picking.stock_shipment_out_picking"/>
-            <field name="name">stock_shipment_out_picking</field>
+            <field name="inherit" ref="stock_picking.stock_shipment_out_picking_start"/>
+            <field name="name">stock_shipment_out_picking_start</field>
         </record>
         <record model="ir.ui.view" id="stock_shipment_out_picking_result">
             <field name="model">stock.shipment.out.picking.result</field>
             <field name="inherit" ref="stock_picking.stock_shipment_out_picking_result"/>
             <field name="name">stock_shipment_out_picking_result</field>
+        </record>
+
+        <!-- Stock Shipment Out Scanning -->
+        <record model="ir.ui.view" id="stock_shipment_out_scanning_start">
+            <field name="model">stock.shipment.out.scanning.start</field>
+            <field name="inherit" ref="stock_picking.stock_shipment_out_scanning_start"/>
+            <field name="name">stock_shipment_out_scanning_start</field>
+        </record>
+        <record model="ir.ui.view" id="stock_shipment_out_scanning_result">
+            <field name="model">stock.shipment.out.scanning.result</field>
+            <field name="inherit" ref="stock_picking.stock_shipment_out_scanning_result"/>
+            <field name="name">stock_shipment_out_scanning_result</field>
         </record>
     </data>
 </tryton>
