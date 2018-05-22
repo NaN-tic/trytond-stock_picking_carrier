@@ -45,7 +45,7 @@ class ShipmentOutPacked:
 
         super(ShipmentOutPacked, self).transition_packed()
         shipment = self.result.shipment
-        dbname = Transaction().cursor.dbname
+        dbname = Transaction().database.name
 
         # Send shipment to carrier API
         if self.picking.carrier and shipment.carrier:
