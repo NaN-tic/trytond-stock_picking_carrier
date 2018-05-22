@@ -1,8 +1,12 @@
-# 
+#
 msgid ""
 msgstr "Content-Type: text/plain; charset=utf-8\n"
 
 msgctxt "error:stock.shipment.out.packed:"
+msgid "Not return API \"%(carrier)s\" a label"
+msgstr "No se ha devuelto la etiqueta API \"%(carrier)s\""
+
+msgctxt "error:stock.shipment.out.scanning:"
 msgid "Not return API \"%(carrier)s\" a label"
 msgstr "No se ha devuelto la etiqueta API \"%(carrier)s\""
 
@@ -18,6 +22,22 @@ msgctxt "field:stock.shipment.out.picking.result,label_name:"
 msgid "Label Name"
 msgstr "Nombre etiqueta"
 
+msgctxt "field:stock.shipment.out.scanning.result,label:"
+msgid "Label"
+msgstr "Etiqueta"
+
+msgctxt "field:stock.shipment.out.scanning.result,label_name:"
+msgid "Label Name"
+msgstr "Nombre etiqueta"
+
+msgctxt "field:stock.shipment.out.scanning.start,carrier:"
+msgid "Carrier"
+msgstr "Transportista"
+
 msgctxt "help:stock.shipment.out.picking,carrier:"
+msgid "Send shipment to API carrier"
+msgstr "Envia el albarán a la API del transportista"
+
+msgctxt "help:stock.shipment.out.scanning.start,carrier:"
 msgid "Send shipment to API carrier"
 msgstr "Envia el albarán a la API del transportista"
