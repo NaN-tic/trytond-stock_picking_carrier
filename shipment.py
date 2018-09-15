@@ -11,8 +11,7 @@ __all__ = ['ShipmentOutPicking', 'ShipmentOutPickingResult', 'ShipmentOutPacked'
     'ShipmentOutScanningStart', 'ShipmentOutScanningResult', 'ShipmentOutScanning']
 
 
-class ShipmentOutPicking:
-    __metaclass__ = PoolMeta
+class ShipmentOutPicking(metaclass=PoolMeta):
     __name__ = 'stock.shipment.out.picking'
     carrier = fields.Boolean('Carrier',
         help='Send shipment to API carrier')
@@ -22,15 +21,13 @@ class ShipmentOutPicking:
         return True
 
 
-class ShipmentOutPickingResult:
-    __metaclass__ = PoolMeta
+class ShipmentOutPickingResult(metaclass=PoolMeta):
     __name__ = 'stock.shipment.out.picking.result'
     label = fields.Binary('Label', filename='label_name')
     label_name = fields.Char('Label Name')
 
 
-class ShipmentOutPacked:
-    __metaclass__ = PoolMeta
+class ShipmentOutPacked(metaclass=PoolMeta):
     __name__ = 'stock.shipment.out.packed'
 
     @classmethod
@@ -87,8 +84,7 @@ class ShipmentOutPacked:
         return res
 
 
-class ShipmentOutScanningStart:
-    __metaclass__ = PoolMeta
+class ShipmentOutScanningStart(metaclass=PoolMeta):
     __name__ = 'stock.shipment.out.scanning.start'
     carrier = fields.Boolean('Carrier',
         help='Send shipment to API carrier')
@@ -98,15 +94,13 @@ class ShipmentOutScanningStart:
         return True
 
 
-class ShipmentOutScanningResult:
-    __metaclass__ = PoolMeta
+class ShipmentOutScanningResult(metaclass=PoolMeta):
     __name__ = 'stock.shipment.out.scanning.result'
     label = fields.Binary('Label', filename='label_name')
     label_name = fields.Char('Label Name')
 
 
-class ShipmentOutScanning:
-    __metaclass__ = PoolMeta
+class ShipmentOutScanning(metaclass=PoolMeta):
     __name__ = 'stock.shipment.out.scanning'
 
     @classmethod
