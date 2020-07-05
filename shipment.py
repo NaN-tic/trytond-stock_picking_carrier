@@ -6,6 +6,8 @@ import tempfile
 from trytond.model import fields
 from trytond.pool import Pool, PoolMeta
 from trytond.transaction import Transaction
+from trytond.i18n import gettext
+from trytond.exceptions import UserError
 
 __all__ = ['ShipmentOutPicking', 'ShipmentOutPickingResult', 'ShipmentOutPacked',
     'ShipmentOutScanningStart', 'ShipmentOutScanningResult', 'ShipmentOutScanning']
@@ -29,13 +31,6 @@ class ShipmentOutPickingResult(metaclass=PoolMeta):
 
 class ShipmentOutPacked(metaclass=PoolMeta):
     __name__ = 'stock.shipment.out.packed'
-
-    @classmethod
-    def __setup__(cls):
-        super(ShipmentOutPacked, cls).__setup__()
-        cls._error_messages.update({
-            'not_label': 'Not return API "%(carrier)s" a label',
-            })
 
     def transition_packed(self):
         Shipment = Pool().get('stock.shipment.out')
@@ -68,9 +63,9 @@ class ShipmentOutPacked(metaclass=PoolMeta):
                 self.result.label_name = label_name
                 return 'result'
             else:
-                self.result.note += self.raise_user_error('not_label', {
-                        'carrier': shipment.carrier.rec_name,
-                        }, raise_exception=False)
+                self.result.note += gettext('stock_picking_carrier.msg_not_label',
+                    carrier=shipment.carrier.rec_name)
+
         # labs is not a file in packed result; we use in extra modules labs file
         self.result.labs = None
         self.result.label = None
@@ -103,13 +98,6 @@ class ShipmentOutScanningResult(metaclass=PoolMeta):
 class ShipmentOutScanning(metaclass=PoolMeta):
     __name__ = 'stock.shipment.out.scanning'
 
-    @classmethod
-    def __setup__(cls):
-        super(ShipmentOutScanning, cls).__setup__()
-        cls._error_messages.update({
-            'not_label': 'Not return API "%(carrier)s" a label',
-            })
-
     def transition_packed(self):
         Shipment = Pool().get('stock.shipment.out')
 
@@ -129,9 +117,8 @@ class ShipmentOutScanning(metaclass=PoolMeta):
                 self.result.label_name = lab.split('/')[2]
                 return 'result'
             else:
-                self.result.note += self.raise_user_error('not_label', {
-                        'carrier': shipment.carrier.rec_name,
-                        }, raise_exception=False)
+                self.result.note += gettext('stock_picking_carrier.msg_not_label',
+                    carrier=shipment.carrier.rec_name)
         self.result.labs = None
         self.result.label = None
         self.result.label_name = None

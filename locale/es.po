@@ -2,14 +2,6 @@
 msgid ""
 msgstr "Content-Type: text/plain; charset=utf-8\n"
 
-msgctxt "error:stock.shipment.out.packed:"
-msgid "Not return API \"%(carrier)s\" a label"
-msgstr "No se ha devuelto la etiqueta API \"%(carrier)s\""
-
-msgctxt "error:stock.shipment.out.scanning:"
-msgid "Not return API \"%(carrier)s\" a label"
-msgstr "No se ha devuelto la etiqueta API \"%(carrier)s\""
-
 msgctxt "field:stock.shipment.out.picking,carrier:"
 msgid "Carrier"
 msgstr "Transportista"
